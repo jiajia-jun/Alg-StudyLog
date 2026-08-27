@@ -36,7 +36,7 @@ int main(){
         }
         if(s[i]== p[j+1]) j++;
         if(j == n) {
-            l= i-n, r= i-1; //0-base下标
+            l= i-n, r= i-1; // 0-base下标
             break;
         }
     }

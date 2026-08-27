@@ -1,3 +1,4 @@
+// 时间复杂度：O(NlogN)
 #include<iostream>
 #include<vector>
 #include<set>
@@ -6,7 +7,7 @@
 
 using namespace std;
 
-unordered_map<int, vector<int>> log; // 用来存储 id和它的点赞的时间情况
+unordered_map<int, vector<int>> logs; // 用来存储 id和它的点赞的时间情况
 set<int> ids;// 存储 id
 vector<int> re; // 存储热帖结果
 
@@ -19,13 +20,17 @@ int main(){
     while(n--){
         int ts, id;
         cin>> ts>> id;
-        log[id].push_back(ts);
+        logs[id].push_back(ts);
         ids.insert(id);
     }
 
     // 对每一个 id逐个计算
     for(int id:ids){
-        auto &tm= log[id];
+        auto &tm= logs[id];
+
+        // 点赞总数小于 k，一定不是热帖，直接跳过即可
+        if (tm.size() < k) continue;
+
         // 先对时间轴排序，方便双指针
         sort(tm.begin(), tm.end());
 
@@ -40,13 +45,14 @@ int main(){
             if(i-j+1>= k){
                 // 记录结果
                 re.push_back(id);
+                break; // 是热帖直接跳出，防止重复记录了
             }
         }
     }
 
-    //对结果排序+去重
+    //对结果排序
     sort(re.begin(), re.end());
-    re.erase(unique(re.begin(), re.end()), re.end());
+    //re.erase(unique(re.begin(), re.end()), re.end()); <-这个是废弃的代码
 
     for(int x: re){
         cout<<x << '\n';
