@@ -1,0 +1,53 @@
+#include<iostream>
+
+using namespace std;
+
+const int N= 100010;
+
+int a[N];
+
+// 可行区域的指针，一定指向最终答案
+// 开区间(l, r)     l <mid < r
+// 找第一个大于 t的数的位置
+int find1(int l, int r, int t){
+    int en= r;
+    while(l+1< r){
+        int mid= (l+r)>> 1;
+        if(a[mid]> t) r= mid;
+        else l= mid;
+    }
+    if(r== en) return -1; // 没有就返回 -1
+    return r; // 右侧均为可行区域，故答案一定是 r
+}
+
+// 开区间(l, r)     l <mid < r
+// 找最后一个小于 t的数的位置
+int find2(int l, int r, int t){
+    int st= l;
+    while(l+1< r){
+        int mid= (l+r)>> 1;
+        if(a[mid]< t) l= mid;
+        else r= mid;
+    }
+    if(l== st) return -1; // 没有就返回 -1
+    return l; // 左侧均为可行区域，故答案一定是 l
+}
+
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n, q;
+    cin>> n>> q;
+    for(int i=1; i<=n; ++i){
+        cin>> a[i];
+    }
+    while(q--){
+        int t;
+        cin>> t;
+        cout<< find1(0, n+1, t)<<'\n';
+        cout<< find2(0, n+1, t)<<'\n';
+        cout<< '\n';
+    }
+}

@@ -10,7 +10,7 @@ void init(){
     memset(h, -1, sizeof(h));
 }
 
-// 建立 编号为a的节点 -> 编号为b单向边
+// 建立 编号为a的节点 -> 编号为b的节点单向边
 void add1(int a, int b){
     e[idx]= b;
     nxt[idx]= h[a];
