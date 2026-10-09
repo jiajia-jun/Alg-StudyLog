@@ -24,8 +24,7 @@ int main() {
         } else {
             // 如果当前区间起点，小于上一个区间终点，区间存在重合
             // 上一个区间终点取此区间终点和其区间终点最大值
-            // 因为已经按照左端点从小到大排序了，就没有必要写
-            // 再写res.back().first = min(res.back().first, i.first)了
+            // 因为已经按照左端点从小到大排序了，就没有必要再写res.back().first = min(res.back().first, i.first)了
             res.back().second = max(res.back().second, i.second);
         }
     }
