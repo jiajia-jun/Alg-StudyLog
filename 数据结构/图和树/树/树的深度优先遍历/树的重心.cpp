@@ -38,11 +38,12 @@ int dfs(int u){
         sum+= t; // 更新以 u为根的节点数
     }
     // max(n-sum, size)剩余各个连通块中最大值
+    // 删除 u 后，连通块包括：
+    // 1) 各个子树，最大为 size
+    // 2) u 的父节点方向，大小为 n - sum
     ans= min(ans, max(n-sum, size));
     return sum;
 }
-
-
 
 int main(){
     ios::sync_with_stdio(false);
