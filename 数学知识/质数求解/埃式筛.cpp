@@ -10,7 +10,7 @@ void did(int n){
     for(int i=2; i<= n; ++i){
         if(!v[i]) {
             prim[i]= 1;
-            for(long long j=i*2; j<=n; j+=i){
+            for(long long j = 1LL*i*i; j<=n; j+=i){ // 质数的倍数一定是合数
                 v[j]= 1;
             }
         }
